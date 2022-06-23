@@ -33,18 +33,8 @@ jobs:
           java-package: jdk
           # The architecture of the package
           architecture: x64
-          # ID of the distributionManagement repository in the pom.xml file. Default is `github`
-          server-id: github
-          # Environment variable name for the username for authentication to the Apache Maven repository. Default is $GITHUB_ACTOR
-          server-username: $GITHUB_ACTOR
-          # Environment variable name for password or token for authentication to the Apache Maven repository. Default is $GITHUB_TOKEN
-          server-password: $GITHUB_TOKEN
-          # Environment variable name for the GPG private key passphrase. Default is $GPG_PASSPHRASE.
-          gpg-passphrase: $GPG_PASSPHRASE
           # Name of the build platform to cache dependencies. It can be "maven", "gradle" or "sbt".
           cache: maven
-          # Workaround to pass job status to post job step. This variable is not intended for manual setting
-          job-status: ${{ job.status }}
           
       - name: Build with Maven
         run: mvn -B package --file pom.xml
