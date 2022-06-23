@@ -90,7 +90,7 @@ jobs:
         uses: robbie-unlikelyai/amazon-ecs-run-task@v2
         with:
           # The name of ECS task definition
-          task-definition: task-definition.json
+          task-definition: ${{ steps.task-def.outputs.task-definition }}
           # The name of the ECS cluster. Will default to the 'default' cluster
           cluster: spring-cluster
           # The count of tasks to run. Will default to the 1
