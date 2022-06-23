@@ -23,6 +23,13 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
       
+      - name: Set up JDK 11
+        uses: actions/setup-java@v3.4.0
+        with:
+          java-version: 11
+      - name: Build with Maven
+        run: mvn clean package --file pom.xml
+      
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
@@ -35,6 +42,7 @@ jobs:
         uses: aws-actions/amazon-ecr-login@v1
 
       - name: Build, tag, and push image to Amazon ECR
+        id: build-image
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           ECR_REPOSITORY: spring-boot
@@ -42,3 +50,26 @@ jobs:
         run: |
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+      
+      - name: Amazon ECS "Render Task Definition" Action
+        id: task-def
+        # You may pin to the exact commit or the version.
+        # uses: aws-actions/amazon-ecs-render-task-definition@374ee96751fffe528c09b5f427848da60469bb55
+        uses: aws-actions/amazon-ecs-render-task-definition@v1
+        with:
+          # The path to the ECS task definition JSON file
+          task-definition: task-definition.json
+          # The name of the container defined in the containerDefinitions section of the ECS task definition
+          container-name: spring-web-container
+          # The URI of the container image to insert into the ECS task definition
+          image: ${{ steps.build-image.outputs.image }}
+          
+      - name: Amazon ECS "Deploy Task Definition" Action
+        # You may pin to the exact commit or the version.
+        # uses: aws-actions/amazon-ecs-deploy-task-definition@9c18d81893224634ac107b91720119c91c1d600e
+        uses: aws-actions/amazon-ecs-deploy-task-definition@v1
+        with:
+          # The path to the ECS task definition file to register
+          task-definition: ${{ steps.task-def.outputs.task-definition }}
+          # The name of the ECS service's cluster.  Will default to the 'default' cluster
+          cluster: spring-cluster
