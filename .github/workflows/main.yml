@@ -84,7 +84,7 @@ jobs:
           # The name of the ECS service's cluster.  Will default to the 'default' cluster
           #cluster: spring-cluster
           
-      - name: Amazon ECS "Run Task" Action
+      - name: Amazon ECS "Deploy Task Definition and Run Task" Action
         # You may pin to the exact commit or the version.
         # uses: robbie-unlikelyai/amazon-ecs-run-task@925c70f7e567333a7669770478cba77ecd5acec8
         uses: robbie-unlikelyai/amazon-ecs-run-task@v2
