@@ -83,3 +83,19 @@ jobs:
           task-definition: ${{ steps.task-def.outputs.task-definition }}
           # The name of the ECS service's cluster.  Will default to the 'default' cluster
           cluster: spring-cluster
+          
+      - name: Amazon ECS "Run Task" Action
+        # You may pin to the exact commit or the version.
+        # uses: smitp/amazon-ecs-run-task@3cbf98e06c9efc02a3d9f4f0e5001835eecd70d6
+        uses: smitp/amazon-ecs-run-task@v1
+        with:
+          # The name of ECS task definition
+          task-definition: task-definition.json
+          # The name of the ECS cluster. Will default to the 'default' cluster
+          cluster: spring-cluster
+          # The count of tasks to run. Will default to the 1
+          count: 1
+          # The value of the task started-by
+          started-by: github-actions-${{ github.actor }}
+          # Whether to wait for tasks to reach stopped state. Will default to not waiting
+          wait-for-finish: true
