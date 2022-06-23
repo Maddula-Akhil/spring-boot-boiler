@@ -99,3 +99,7 @@ jobs:
           started-by: github-actions-${{ github.actor }}
           # Whether to wait for tasks to reach stopped state. Will default to not waiting
           wait-for-finish: true
+          # The subnet to run the task in
+          subnet: subnet-0cfa5ed0e04c8d43d
+          # The security ground to run the task with
+          security-group: sg-0b044e4fe3d7d85a2
