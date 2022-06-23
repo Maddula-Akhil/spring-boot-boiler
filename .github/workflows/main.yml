@@ -100,4 +100,4 @@ jobs:
           # The subnet to run the task in
           subnet: subnet-0cfa5ed0e04c8d43d
           # The security ground to run the task with
-          security-group: sg-0b044e4fe3d7d85a2
+          security-group: sg-0dc92340a3450bec5
