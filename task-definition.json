@@ -70,10 +70,6 @@
   "requiresCompatibilities": [
     "FARGATE"
   ],
-  "networkMode": "awsvpc",
-  "runtimePlatform": null,
-  "cpu": "512",
-  "inferenceAccelerators": null,
-  "proxyConfiguration": null,
-  "volumes": []
+  "networkMode": "bridge",
+  "cpu": "512"
 }
