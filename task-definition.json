@@ -70,6 +70,6 @@
   "requiresCompatibilities": [
     "FARGATE"
   ],
-  "networkMode": "bridge",
+  "networkMode": "awsvpc",
   "cpu": "512"
 }
