@@ -74,15 +74,15 @@ jobs:
           # The URI of the container image to insert into the ECS task definition
           image: ${{ steps.build-image.outputs.image }}
           
-      - name: Amazon ECS "Deploy Task Definition" Action
+      #- name: Amazon ECS "Deploy Task Definition" Action
         # You may pin to the exact commit or the version.
         # uses: aws-actions/amazon-ecs-deploy-task-definition@9c18d81893224634ac107b91720119c91c1d600e
-        uses: aws-actions/amazon-ecs-deploy-task-definition@v1
-        with:
+       # uses: aws-actions/amazon-ecs-deploy-task-definition@v1
+       # with:
           # The path to the ECS task definition file to register
-          task-definition: ${{ steps.task-def.outputs.task-definition }}
+         # task-definition: ${{ steps.task-def.outputs.task-definition }}
           # The name of the ECS service's cluster.  Will default to the 'default' cluster
-          cluster: spring-cluster
+          #cluster: spring-cluster
           
       - name: Amazon ECS "Run Task" Action
         # You may pin to the exact commit or the version.
@@ -97,8 +97,6 @@ jobs:
           count: 1
           # The value of the task started-by
           started-by: github-actions-${{ github.actor }}
-          # Whether to wait for tasks to reach stopped state. Will default to not waiting
-          wait-for-finish: true
           # The subnet to run the task in
           subnet: subnet-0cfa5ed0e04c8d43d
           # The security ground to run the task with
