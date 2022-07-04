@@ -110,16 +110,16 @@ jobs:
           # The name of the target group.
           name: ecs tg
           # The protocol to use for routing traffic to the targets.
-          protocol: http
+          protocol: HTTP
           # The protocol version.
-          protocol-version: http1
+          protocol-version: HTTP1
           # The port for the load balancer traffic
           port: 80
           # The identifier of the virtual private cloud (VPC).
           vpc-id: vpc-0db99500d60c4ecf5
           # The protocol the load balancer uses when performing health checks on targets.
-          health-check-protocol: http
+          health-check-protocol: HTTP
           # The destination for health checks on the targets.
           health-check-path: /
           # The port on which the targets receive traffic.
-          target-type: ip addresses
+          target-type: ip
