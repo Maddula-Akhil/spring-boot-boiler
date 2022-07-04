@@ -74,52 +74,50 @@ jobs:
           # The URI of the container image to insert into the ECS task definition
           image: ${{ steps.build-image.outputs.image }}
           
-      #- name: Amazon ECS "Deploy Task Definition" Action
-        # You may pin to the exact commit or the version.
-        # uses: aws-actions/amazon-ecs-deploy-task-definition@9c18d81893224634ac107b91720119c91c1d600e
-       # uses: aws-actions/amazon-ecs-deploy-task-definition@v1
-       # with:
-          # The path to the ECS task definition file to register
-         # task-definition: ${{ steps.task-def.outputs.task-definition }}
-          # The name of the ECS service's cluster.  Will default to the 'default' cluster
-          #cluster: spring-cluster
-          
-      - name: Amazon ECS "Deploy Task Definition and Run Task" Action
+      #- name: Amazon ECS "Deploy Task Definition and Run Task" Action
         # You may pin to the exact commit or the version.
         # uses: robbie-unlikelyai/amazon-ecs-run-task@925c70f7e567333a7669770478cba77ecd5acec8
-        uses: robbie-unlikelyai/amazon-ecs-run-task@v2
-        with:
+        #uses: robbie-unlikelyai/amazon-ecs-run-task@v2
+        #with:
           # The name of ECS task definition
-          task-definition: ${{ steps.task-def.outputs.task-definition }}
+          #task-definition: ${{ steps.task-def.outputs.task-definition }}
           # The name of the ECS cluster. Will default to the 'default' cluster
-          cluster: spring-cluster
+          #cluster: spring-cluster
           # The count of tasks to run. Will default to the 1
-          count: 1
+          #count: 1
           # The value of the task started-by
-          started-by: github-actions-${{ github.actor }}
+          #started-by: github-actions-${{ github.actor }}
           # The subnet to run the task in
-          subnet: subnet-0cfa5ed0e04c8d43d
+          #subnet: subnet-0cfa5ed0e04c8d43d
           # The security ground to run the task with
-          security-group: sg-0dc92340a3450bec5
+         # security-group: sg-0dc92340a3450bec5
           
-      - name: Configure AWS ELB Target Group
+      #- name: Configure AWS ELB Target Group
         # You may pin to the exact commit or the version.
         # uses: icalia-actions/aws-configure-elb-target-group@7ea43ad0fd746b0f625788b986fffe1ee023cc80
-        uses: icalia-actions/aws-configure-elb-target-group@v0.0.3
-        with:
+        #uses: icalia-actions/aws-configure-elb-target-group@v0.0.3
+        #with:
           # The name of the target group.
-          name: ecs-tg
+          #name: ecs-tg
           # The protocol to use for routing traffic to the targets.
-          protocol: HTTP
+         # protocol: HTTP
           # The protocol version.
-          protocol-version: HTTP1
+         # protocol-version: HTTP1
           # The port for the load balancer traffic
-          port: 80
+         # port: 80
           # The identifier of the virtual private cloud (VPC).
-          vpc-id: vpc-0db99500d60c4ecf5
+          #vpc-id: vpc-0db99500d60c4ecf5
           # The protocol the load balancer uses when performing health checks on targets.
-          health-check-protocol: HTTP
+          #health-check-protocol: HTTP
           # The destination for health checks on the targets.
-          health-check-path: /
+          #health-check-path: /
           # The port on which the targets receive traffic.
-          target-type: ip
+         # target-type: ip
+          
+      - name: Deploy Amazon ECS task definition
+        uses: aws-actions/amazon-ecs-deploy-task-definition@v1
+        with:
+          task-definition: ${{ steps.task-def.outputs.task-definition }}
+          service: spring-service
+          cluster: spring-cluster
+          wait-for-service-stability: true
