@@ -108,7 +108,7 @@ jobs:
         uses: icalia-actions/aws-configure-elb-target-group@v0.0.3
         with:
           # The name of the target group.
-          name: ecs tg
+          name: ecs-tg
           # The protocol to use for routing traffic to the targets.
           protocol: HTTP
           # The protocol version.
