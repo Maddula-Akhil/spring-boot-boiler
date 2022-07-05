@@ -119,5 +119,5 @@ jobs:
         with:
           task-definition: ${{ steps.task-def.outputs.task-definition }}
           service: spring-service
-          cluster: spring-cluster
+          cluster: spring-next-cluster
           wait-for-service-stability: true
