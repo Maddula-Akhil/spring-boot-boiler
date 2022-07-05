@@ -114,7 +114,7 @@ jobs:
           # The port on which the targets receive traffic.
          # target-type: ip
           
-      - name: Deploy AWS ECS task definition
+      - name: Deploy Amazon ECS task definition
         uses: aws-actions/amazon-ecs-deploy-task-definition@v1
         with:
           task-definition: ${{ steps.task-def.outputs.task-definition }}
